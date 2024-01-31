@@ -26,6 +26,11 @@ def on_press(key):
     if key == stop_start_key:
         is_running = not is_running
         
+print('f1 - set silver pens location')
+print('f2 - set place for a signature location')
+print('f4 - start/stop')
+print('esc - close app')
+
 with keyboard.Listener(on_press) as listener:
     time.sleep(start_duration)
     while exit_program == False:
