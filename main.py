@@ -41,7 +41,7 @@ with keyboard.Listener(on_press=stop) as listener:
     while True:
         event, values = window.read()
         print(event, values)
-        if event == 'set pens laction':
+        if event == 'set pens location':
             # TODO remove multiple clicking bug
             with keyboard.Listener(on_press=set_pen_location) as listener1:
                 listener1.join()
