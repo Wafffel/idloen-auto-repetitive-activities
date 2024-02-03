@@ -1,6 +1,9 @@
-Simple app to use silver pens fastly and without any effort.
+Simple app to do idleon boring tasks (using candies and silver pens for now) fastly and without losing finger by clicking for long hours.
 
 How to use:
-First set location of silver pens and place for a signature.
-Default settings should work when game is on fullscreen on 1920x1080 screen
-Then click start button and enjoy saved time.
+First choose thing that you want app to do for you.
+Then set location of every idleon button.
+At the end click start button and enjoy annoying process being done automatically.
+
+Known bugs:
+using candies doesn't work when amount of drops changes
