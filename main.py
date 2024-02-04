@@ -82,9 +82,10 @@ with keyboard.Listener(on_press=stop) as listener:
                     pgui.click(duration=action_duration)
                     pgui.click(duration=action_duration)
             if values[0] == modes[1]:
-                while is_running:
-                    pgui.press('i')
+                while is_running:                                        
                     pgui.moveTo(candy_location['x'], candy_location['y'], action_duration)
+                    pgui.press('i')
+                    time.sleep(action_duration)
                     pgui.mouseDown(duration=action_duration)
                     time.sleep(hold_duration)
                     pgui.mouseUp(duration=action_duration)
@@ -112,8 +113,5 @@ with keyboard.Listener(on_press=stop) as listener:
             window['-start-'].unhide_row()
         if event == sg.WIN_CLOSED:
             break
-
-print(f'pen location {pens_location["x"]} {pens_location["y"]}')
-print(f'signature location {signature_location["x"]} {signature_location["y"]}')
-print(f'candy location {candy_location["x"]} {candy_location["y"]}')
+        
 window.close()
