@@ -14,14 +14,10 @@ set_location_key = keyboard.Key.space
 
 sg.theme('Green')
 elements = [['silver pens', 'signature'], ['candies'], ['ballons']]
-modes = []
-for element in elements:
-    modes.append(element[0])
+modes = [element[0] for element in elements]
 keys = []
 for elements1 in elements:
-    t =[]
-    for element in elements1:
-        t.append(f'-set_{element.replace(" ", "_")}_location-')
+    t =[f'-set_{element.replace(" ", "_")}_location-' for element in elements1]
     keys.append(t)
 locations = {}
 for element in sum(elements, []):
@@ -39,7 +35,7 @@ window = sg.Window(title='Idleon Hours Saver', layout=layout, element_justificat
 
 def set_location(key, location_dict):
     if key == set_location_key:
-        location_dict['x'], location_dict['y'] = pgui.position()
+        location_dict['x'], location_dict['y'] = pgui.position()        
         return False
     
 def hide_elements(element_names):
@@ -49,6 +45,11 @@ def hide_elements(element_names):
 def unhide_elements(element_names):
     for element_name in element_names:
         window[element_name].unhide_row()
+
+def stop(key):
+    global is_running
+    if key == stop_key:
+        is_running = False
 
 def use_silver_pens():
     while is_running:
@@ -76,11 +77,6 @@ def use_ballons():
         time.sleep(hold_duration)
         pgui.mouseUp(duration=action_duration)
 
-def stop(key):
-    global is_running
-    if key == stop_key:
-        is_running = False
-
 is_running = False
 hide_elements(sum(keys[1:], []))
 
@@ -90,9 +86,8 @@ with keyboard.Listener(on_press=stop) as listener:
         print(event, values)
         for i in range(len(sum(keys, []))):
             if event == sum(keys, [])[i]:
-                # TODO remove multiple clicking bug
                 with keyboard.Listener(on_press=lambda key:set_location(key,location_dict=locations[sum(elements, [])[i]])) as listener1:
-                    listener1.join()              
+                    listener1.join()       
         if event == '-start-':
             is_running = True
             for mode in modes:
