@@ -5,10 +5,10 @@ from pynput import keyboard
 
 action_duration = 0.1
 hold_duration = 0.15
-pens_location = {'x':200, 'y':850}
-signature_location = {'x':200, 'y':770}
-candy_location = {'x':200, 'y':850}
-ballon_location = {'x':200, 'y':770}
+pens_location = {'x':186, 'y':850}
+signature_location = {'x':275, 'y':774}
+candy_location = {'x':1318, 'y':354}
+ballon_location = {'x':1318, 'y':354}
 stop_key = keyboard.Key.esc
 set_location_key = keyboard.Key.space
 
