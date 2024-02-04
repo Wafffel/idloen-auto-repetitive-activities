@@ -4,8 +4,8 @@ import pyautogui as pgui
 from pynput import keyboard
 
 action_duration = 0.1
-hold_duration = 0.2
-pen_location = {'x':200, 'y':850}
+hold_duration = 0.15
+pens_location = {'x':200, 'y':850}
 signature_location = {'x':200, 'y':770}
 candy_location = {'x':200, 'y':850}
 ballon_location = {'x':200, 'y':770}
@@ -26,9 +26,9 @@ layout = [[sg.Combo(values=modes, default_value=modes[0], readonly=True), sg.But
 
 window = sg.Window(title='Idleon Hours Saver', layout=layout, element_justification='center', finalize=True)
 
-def set_pen_location(key):
+def set_pens_location(key):
     if key == set_location_key:
-        pen_location['x'], pen_location['y'] = pgui.position()
+        pens_location['x'], pens_location['y'] = pgui.position()
         return False
 
 def set_signature_location(key):
@@ -61,7 +61,7 @@ with keyboard.Listener(on_press=stop) as listener:
         print(event, values)
         if event == '-set_pens_location-':
             # TODO remove multiple clicking bug
-            with keyboard.Listener(on_press=set_pen_location) as listener1:
+            with keyboard.Listener(on_press=set_pens_location) as listener1:
                 listener1.join()
         if event == '-set_signature_location-':
             with keyboard.Listener(on_press=set_signature_location) as listener1:
@@ -76,7 +76,7 @@ with keyboard.Listener(on_press=stop) as listener:
             is_running = True
             if values[0] == modes[0]:
                 while is_running:
-                    pgui.moveTo(pen_location['x'], pen_location['y'], action_duration)
+                    pgui.moveTo(pens_location['x'], pens_location['y'], action_duration)
                     pgui.click(duration=action_duration)
                     pgui.moveTo(signature_location['x'], signature_location['y'], action_duration)
                     pgui.click(duration=action_duration)
@@ -113,4 +113,7 @@ with keyboard.Listener(on_press=stop) as listener:
         if event == sg.WIN_CLOSED:
             break
 
+print(f'pen location {pens_location["x"]} {pens_location["y"]}')
+print(f'signature location {signature_location["x"]} {signature_location["y"]}')
+print(f'candy location {candy_location["x"]} {candy_location["y"]}')
 window.close()

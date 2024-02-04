@@ -4,6 +4,3 @@ How to use:
 First choose thing that you want app to do for you.
 Then set location of every idleon button.
 At the end click start button and enjoy annoying process being done automatically.
-
-Known bugs:
-using candies doesn't work when amount of drops changes
