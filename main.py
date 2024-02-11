@@ -5,15 +5,13 @@ from pynput import keyboard
 
 action_duration = 0.1
 hold_duration = 0.15
-# pens_location = {'x':186, 'y':850}
-# signature_location = {'x':275, 'y':774}
-# candies_location = {'x':1318, 'y':354}
-# ballon_location = {'x':1318, 'y':354}
+destroy_boss_duration = 6
+collect_loot_duration = 3
 stop_key = keyboard.Key.esc
 set_location_key = keyboard.Key.space
 
 sg.theme('Green')
-elements = [['silver pens', 'signature'], ['candies'], ['ballons']]
+elements = [['silver pens', 'signature'], ['candies'], ['ballons'], ['boss refresh', 'start of loot', 'end of loot']]
 modes = [element[0] for element in elements]
 keys = []
 for elements1 in elements:
@@ -75,6 +73,16 @@ def use_ballons():
         pgui.moveTo(locations['ballons']['x'], locations['ballons']['y'], action_duration)
         pgui.mouseDown(duration=action_duration)
         time.sleep(hold_duration)
+        pgui.mouseUp(duration=action_duration)
+
+def use_boss_refresh():
+    while is_running:
+        pgui.moveTo(locations['boss refresh']['x'], locations['boss refresh']['y'], action_duration)
+        pgui.click(duration=action_duration)
+        time.sleep(destroy_boss_duration)
+        pgui.moveTo(locations['start of loot']['x'], locations['start of loot']['y'], action_duration)
+        pgui.mouseDown(duration=action_duration)
+        pgui.moveTo(locations['end of loot']['x'], locations['end of loot']['y'], collect_loot_duration)
         pgui.mouseUp(duration=action_duration)
 
 is_running = False
