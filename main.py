@@ -11,7 +11,7 @@ stop_key = keyboard.Key.esc
 set_location_key = keyboard.Key.space
 
 sg.theme('Green')
-elements = [['silver pens', 'signature'], ['candies'], ['ballons'], ['boss refresh', 'start of loot', 'end of loot']]
+elements = [['silver pens', 'signature'], ['candies'], ['ballons'], ['boss refresh', 'start of loot', 'end of loot'], ['click']]
 modes = [element[0] for element in elements]
 keys = []
 for elements1 in elements:
@@ -84,6 +84,11 @@ def use_boss_refresh():
         pgui.mouseDown(duration=action_duration)
         pgui.moveTo(locations['end of loot']['x'], locations['end of loot']['y'], collect_loot_duration)
         pgui.mouseUp(duration=action_duration)
+
+def use_click():
+    pgui.moveTo(locations['click']['x'], locations['click']['y'], action_duration)
+    while is_running:
+        pgui.click(duration=action_duration)
 
 is_running = False
 hide_elements(sum(keys[1:], []))
