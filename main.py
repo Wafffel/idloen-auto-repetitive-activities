@@ -58,8 +58,8 @@ def use_silver_pens():
         pgui.click(duration=action_duration)
 
 def use_candies():
-    while is_running:                                           
-        pgui.moveTo(locations['candies']['x'], locations['candies']['y'], action_duration)
+    pgui.moveTo(locations['candies']['x'], locations['candies']['y'], action_duration)
+    while is_running:                                                   
         pgui.press('i')
         time.sleep(action_duration)
         pgui.mouseDown(duration=action_duration)
@@ -69,8 +69,8 @@ def use_candies():
         pgui.press('space')
 
 def use_ballons():
-    while is_running:
-        pgui.moveTo(locations['ballons']['x'], locations['ballons']['y'], action_duration)
+    pgui.moveTo(locations['ballons']['x'], locations['ballons']['y'], action_duration)
+    while is_running:        
         pgui.mouseDown(duration=action_duration)
         time.sleep(hold_duration)
         pgui.mouseUp(duration=action_duration)
