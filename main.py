@@ -12,7 +12,7 @@ stop_key = keyboard.Key.esc
 set_location_key = keyboard.Key.space
 
 sg.theme('Green')
-elements = [['silver pens', 'signature'], ['candies'], ['ballons'], ['boss refresh', 'start of loot', 'end of loot'], ['click'], ['quick anvil deposit', 'produce tab', 'codex button', 'quick ref anvil', 'players button', 'player 1', 'player 2', 'player 3', 'player 4', 'player 5', 'player 6', 'left player tab arrow', 'right player tab arrow']]
+elements = [['silver pens', 'signature'], ['candies'], ['ballons'], ['boss refresh', 'start of loot', 'end of loot'], ['click'], ['quick anvil deposit', 'produce tab', 'codex button', 'quick ref', 'quick ref anvil', 'players button', 'player 1', 'player 2', 'player 3', 'player 4', 'player 5', 'player 6', 'left player tab arrow', 'right player tab arrow']]
 modes = [element[0] for element in elements]
 keys = []
 for elements1 in elements:
@@ -102,6 +102,8 @@ def use_click():
 
 def single_anvil_claim():
     pgui.moveTo(locations['codex button']['x'], locations['codex button']['y'], action_duration)
+    pgui.click(duration=action_duration)
+    pgui.moveTo(locations['quick ref']['x'], locations['quick ref']['y'], action_duration)
     pgui.click(duration=action_duration)
     pgui.moveTo(locations['quick ref anvil']['x'], locations['quick ref anvil']['y'], action_duration)
     pgui.click(duration=action_duration)

@@ -9,6 +9,7 @@ click;0;0
 quick anvil deposit;889;210
 produce tab;1049;231
 codex button;1374;971
+quick ref;1165;219
 quick ref anvil;913;372
 players button;1642;967
 player 1;639;354
