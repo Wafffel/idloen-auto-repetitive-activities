@@ -1,0 +1,8 @@
+silver pens;0;0
+signature;0;0
+candies;0;0
+ballons;0;0
+boss refresh;0;0
+start of loot;0;0
+end of loot;0;0
+click;0;0

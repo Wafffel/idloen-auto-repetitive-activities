@@ -21,6 +21,15 @@ locations = {}
 for element in sum(elements, []):
     locations[element] = {'x':0, 'y':0}
 
+with open('positions.txt', 'r') as f:
+    while True:
+        line = f.readline()
+        if not line:
+            break
+        position=line[:-1].split(';')
+        locations[position[0]] = {'x':position[1], 'y':position[2]}
+
+print(locations)
 layout = [[sg.Combo(values=modes, default_value=modes[0], readonly=True), sg.Button(button_text='change mode', key='-change_mode-')],
           [sg.Text('to set position of object press the corresponding button')],
           [sg.Text('then move your cursor to the object and press space')]]
@@ -116,3 +125,7 @@ with keyboard.Listener(on_press=stop) as listener:
             break
         
 window.close()
+
+with open('positions.txt', 'w') as f:
+    for key, value in locations.items():
+        f.write(f'{key};{value["x"]};{value["y"]}\n')
