@@ -7,11 +7,12 @@ action_duration = 0.1
 hold_duration = 0.15
 destroy_boss_duration = 6
 collect_loot_duration = 3
+load_player_duration = 3
 stop_key = keyboard.Key.esc
 set_location_key = keyboard.Key.space
 
 sg.theme('Green')
-elements = [['silver pens', 'signature'], ['candies'], ['ballons'], ['boss refresh', 'start of loot', 'end of loot'], ['click']]
+elements = [['silver pens', 'signature'], ['candies'], ['ballons'], ['boss refresh', 'start of loot', 'end of loot'], ['click'], ['quick anvil deposit', 'produce tab', 'codex button', 'quick ref anvil', 'players button', 'player 1', 'player 2', 'player 3', 'player 4', 'player 5', 'player 6', 'left player tab arrow', 'right player tab arrow']]
 modes = [element[0] for element in elements]
 keys = []
 for elements1 in elements:
@@ -20,14 +21,14 @@ for elements1 in elements:
 locations = {}
 for element in sum(elements, []):
     locations[element] = {'x':0, 'y':0}
-
+ 
 with open('positions.txt', 'r') as f:
     while True:
         line = f.readline()
         if not line:
             break
         position=line[:-1].split(';')
-        locations[position[0]] = {'x':position[1], 'y':position[2]}
+        locations[position[0]] = {'x':int(position[1]), 'y':int(position[2]) }
 
 print(locations)
 layout = [[sg.Combo(values=modes, default_value=modes[0], readonly=True), sg.Button(button_text='change mode', key='-change_mode-')],
@@ -98,6 +99,44 @@ def use_click():
     pgui.moveTo(locations['click']['x'], locations['click']['y'], action_duration)
     while is_running:
         pgui.click(duration=action_duration)
+
+def single_anvil_claim():
+    pgui.moveTo(locations['codex button']['x'], locations['codex button']['y'], action_duration)
+    pgui.click(duration=action_duration)
+    pgui.moveTo(locations['quick ref anvil']['x'], locations['quick ref anvil']['y'], action_duration)
+    pgui.click(duration=action_duration)
+    pgui.moveTo(locations['produce tab']['x'], locations['produce tab']['y'], action_duration)
+    pgui.click(duration=action_duration)
+    pgui.moveTo(locations['quick anvil deposit']['x'], locations['quick anvil deposit']['y'], action_duration)
+    pgui.click(duration=action_duration)
+
+def swap_player(number):
+    pgui.moveTo(locations['players button']['x'], locations['players button']['y'], action_duration)
+    pgui.click(duration=action_duration)
+    pgui.moveTo(locations[f'player {number+1}']['x'], locations[f'player {number+1}']['y'], action_duration)
+    pgui.click(duration=action_duration)
+    time.sleep(load_player_duration)
+    pgui.press('space')
+
+def use_quick_anvil_deposit():
+    global is_running
+    is_running = False
+    pgui.moveTo(locations['players button']['x'], locations['players button']['y'], action_duration)
+    pgui.click(duration=action_duration)
+    pgui.moveTo(locations['left player tab arrow']['x'], locations['left player tab arrow']['y'], action_duration)
+    pgui.click(duration=action_duration)
+    pgui.press('esc')
+    for i in range(6):
+        swap_player(i)
+        single_anvil_claim()
+    pgui.moveTo(locations['players button']['x'], locations['players button']['y'], action_duration)
+    pgui.click(duration=action_duration)
+    pgui.moveTo(locations['right player tab arrow']['x'], locations['right player tab arrow']['y'], action_duration)
+    pgui.click(duration=action_duration)
+    pgui.press('esc')
+    for i in range(4):
+        swap_player(i)
+        single_anvil_claim()
 
 is_running = False
 hide_elements(sum(keys[1:], []))

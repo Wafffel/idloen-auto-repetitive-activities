@@ -6,3 +6,18 @@ boss refresh;0;0
 start of loot;0;0
 end of loot;0;0
 click;0;0
+quick anvil deposit;889;210
+produce tab;1049;231
+codex button;1374;971
+quick ref anvil;913;372
+players button;1642;967
+player 1;639;354
+player 2;1004;377
+player 3;1400;386
+player 4;675;585
+player 5;1023;584
+player 6;1307;590
+left player tab arrow;594;770
+right player tab arrow;1417;772
+codex;0;0
+claim anvil;0;0
